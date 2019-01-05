@@ -3,8 +3,46 @@ title: "Untitled"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r settings, include=FALSE}
+library(ggplot2)
+library(knitr)
+library(xtable)
+library(DT)
+library(readxl)
+#opts_chunk$set()
+opts_template$set(smallFig = list(fig.height=6, fig.width = 7))
+
+knit_hooks$set(koreanG = function(before){
+  if(before){
+    library(extrafont)
+    par(family="NanumGothic")
+  }
+},
+koreanM = function(before){
+  if(before){
+    library(extrafont)
+    par(family = "NanumMyeongjo")
+  }
+}
+)
+```
+
+### 표 그리기 연습
+
+```{r opts.label = 'smallFig', results='asis', echo=FALSE}
+graduate_2018 <- read_excel("graduate_2018.xls")
+graduate_2018$단과대학 = as.factor(graduate_2018$단과대학)
+graduate_2018$학과명 = as.factor(graduate_2018$학과명)
+graduate_2018$백분율점수구간 = as.factor(graduate_2018$백분율점수구간)
+
+## double click the cell to edit..!
+datatable(graduate_2018, editable = TRUE,filter = 'top', options = list(
+  pageLength = 9, autoWidth = TRUE, initComplete = JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'font-size': '10px'});",
+    "}")
+)) %>%
+formatStyle(1:8, `font-size` = '9pt')
 ```
 
 ## GitHub Documents
