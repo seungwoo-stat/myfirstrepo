@@ -1,6 +1,10 @@
 Untitled
 ================
 
+### 표 그리기 연습
+
+![](index_files/figure-markdown_github/unnamed-chunk-1-1.png)
+
 GitHub Documents
 ----------------
 
